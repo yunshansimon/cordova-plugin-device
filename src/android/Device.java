@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 
 public class Device extends CordovaPlugin {
     public static final String TAG = "Device";
@@ -109,7 +110,8 @@ public class Device extends CordovaPlugin {
      * @return
      */
     public String getUuid() {
-        String uuid = Settings.Secure.getString(this.cordova.getActivity().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+        TelephonyManager telephonyManager=(TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+        String uuid=telephonyManager.getDeviceId();
         return uuid;
     }
 
