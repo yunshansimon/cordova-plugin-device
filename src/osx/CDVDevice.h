@@ -18,6 +18,7 @@
  */
 
 #import <Cordova/CDVPlugin.h>
+#import <AdSupport/Adsupport.h>
 
 @interface CDVDevice : CDVPlugin
 

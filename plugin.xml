@@ -75,7 +75,7 @@
 
         <source-file src="src/android/Device.java" target-dir="src/org/apache/cordova/device" />
     </platform>
-    
+
     <!-- ubuntu -->
     <platform name="ubuntu">
         <header-file src="src/ubuntu/device.h" />
@@ -92,7 +92,7 @@
                 <param name="ios-package" value="CDVDevice"/>
             </feature>
         </config-file>
-
+        <framework src="AdSupport.framework"/>
         <header-file src="src/ios/CDVDevice.h" />
         <source-file src="src/ios/CDVDevice.m" />
     </platform>

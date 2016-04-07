@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
@@ -40,6 +41,7 @@ public class Device extends CordovaPlugin {
     private static final String ANDROID_PLATFORM = "Android";
     private static final String AMAZON_PLATFORM = "amazon-fireos";
     private static final String AMAZON_DEVICE = "Amazon";
+    private Context context;
 
     /**
      * Constructor.
@@ -56,6 +58,7 @@ public class Device extends CordovaPlugin {
      */
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
+        context=cordova.getActivity().getApplicationContext();
         Device.uuid = getUuid();
     }
 
@@ -75,7 +78,7 @@ public class Device extends CordovaPlugin {
             r.put("platform", this.getPlatform());
             r.put("model", this.getModel());
             r.put("manufacturer", this.getManufacturer());
-	        r.put("isVirtual", this.isVirtual());
+            r.put("isVirtual", this.isVirtual());
             r.put("serial", this.getSerialNumber());
             callbackContext.success(r);
         }
@@ -111,7 +114,7 @@ public class Device extends CordovaPlugin {
      */
     public String getUuid() {
         TelephonyManager telephonyManager=(TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-        String uuid=telephonyManager.getDeviceId();
+        uuid=telephonyManager.getDeviceId();
         return uuid;
     }
 
@@ -169,8 +172,8 @@ public class Device extends CordovaPlugin {
     }
 
     public boolean isVirtual() {
-	return android.os.Build.FINGERPRINT.contains("generic") ||
-	    android.os.Build.PRODUCT.contains("sdk");
+    return android.os.Build.FINGERPRINT.contains("generic") ||
+        android.os.Build.PRODUCT.contains("sdk");
     }
 
 }
