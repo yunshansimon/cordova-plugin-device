@@ -20,7 +20,7 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 #include "TargetConditionals.h"
-
+#import <AdSupport/ASIdentifierManager.h>
 #import <Cordova/CDV.h>
 #import "CDVDevice.h"
 
@@ -50,7 +50,7 @@
 {
     NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
     static NSString* UUID_KEY = @"CDVUUID";
-    
+
     // Check user defaults first to maintain backwards compaitibility with previous versions
     // which didn't user identifierForVendor
     NSString* app_uuid = [userDefaults stringForKey:UUID_KEY];
@@ -59,7 +59,7 @@
         if (idManager.advertisingTrackingEnabled)
         {
             app_uuid = idManager.advertisingIdentifier.UUIDString;
-            
+
         }
         else
         {
@@ -68,7 +68,7 @@
         [userDefaults setObject:app_uuid forKey:UUID_KEY];
         [userDefaults synchronize];
     }
-    
+
     return app_uuid;
 }
 
